@@ -1,0 +1,464 @@
+/* ================================================================
+   dashkit.css — Dashkit Admin Widget System
+   ================================================================ */
+
+/* ── Variables ─────────────────────────────────────────────────── */
+:root {
+	--dashkit-bg: #fff;
+	--dashkit-bg-subtle: #f6f7f7;
+	--dashkit-border: #e2e4e7;
+	--dashkit-border-dark: #c3c4c7;
+	--dashkit-text: #1d2327;
+	--dashkit-text-muted: #50575e;
+	--dashkit-blue: #2271b1;
+	--dashkit-green: #00a32a;
+	--dashkit-red: #d63638;
+	--dashkit-yellow: #dba617;
+	--dashkit-radius: 4px;
+	--dashkit-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--dashkit-border-subtle: #f0f0f1;
+	--dashkit-bg-hover: #f0f6fc;
+	--dashkit-bg-stripe: #fafafa;
+	--dashkit-selected-bg: #e5f0fb;
+	--dashkit-action-color: #007cba;
+}
+
+/* ── Widget shell ──────────────────────────────────────────────── */
+@keyframes dashkit-header-shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.dashkit-widget {
+	background: var(--dashkit-bg);
+	border: 1px solid var(--dashkit-border);
+	border-radius: var(--dashkit-radius);
+	box-shadow: var(--dashkit-shadow);
+	margin-bottom: 20px;
+	overflow: hidden;
+	position: relative;
+	transition: opacity 0.2s;
+
+	&--loading {
+		opacity: 0.55;
+		pointer-events: none;
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: rgba(255, 255, 255, 0.4);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		& .dashkit-widget__header {
+			background: linear-gradient(
+				90deg,
+				var(--dashkit-bg-subtle) 25%,
+				#e2e8f0 50%,
+				var(--dashkit-bg-subtle) 75%
+			);
+			background-size: 200% 100%;
+			animation: dashkit-header-shimmer 1.4s ease-in-out infinite;
+		}
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 5px 10px;
+		border-bottom: 1px solid var(--dashkit-border);
+		background: var(--dashkit-bg-subtle);
+		gap: 8px;
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin: 0;
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--dashkit-text);
+
+		i {
+			color: var(--dashkit-blue);
+		}
+	}
+
+	&__badges {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		font-weight: normal;
+	}
+
+	&__header-actions {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	&__badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 1px 6px;
+		border-radius: 10px;
+		font-size: 10px;
+		font-weight: 600;
+		line-height: 1.5;
+		text-decoration: none;
+		vertical-align: middle;
+		background: var(--dashkit-bg-subtle);
+		color: var(--dashkit-text-muted);
+		border: 1px solid var(--dashkit-border-dark);
+
+		a&:hover {
+			opacity: 0.8;
+		}
+	}
+
+	&__options-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		padding: 0;
+		background: none;
+		border: 1px solid transparent;
+		border-radius: var(--dashkit-radius);
+		color: var(--dashkit-text-muted);
+		font-size: 14px;
+		cursor: pointer;
+		line-height: 1;
+		transition:
+			color 0.15s,
+			border-color 0.15s,
+			background 0.15s;
+
+		&:hover,
+		&:focus {
+			color: var(--dashkit-text);
+			border-color: var(--dashkit-border-dark);
+			background: var(--dashkit-bg);
+		}
+	}
+}
+
+/* ── Zone layouts ──────────────────────────────────────────────── */
+.dashkit-layout--multi-col {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 24px;
+	align-items: start;
+
+	@media (max-width: 900px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Table widget ──────────────────────────────────────────────── */
+.dashkit-table__toolbar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 12px;
+	border-bottom: 1px solid var(--dashkit-border);
+	flex-wrap: wrap;
+}
+
+.dashkit-table__count {
+	font-size: 11px;
+	color: var(--dashkit-text-muted);
+	margin-left: auto;
+}
+
+.dashkit-table__wrap {
+	overflow-x: auto;
+}
+
+.dashkit-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0;
+	border: none;
+	box-shadow: none;
+	background: transparent;
+
+	tr {
+		background: transparent;
+		border: none;
+		box-shadow: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	thead th {
+		padding: 4px 10px;
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--dashkit-text-muted);
+		background: var(--dashkit-bg-subtle);
+		border-bottom: 1px solid var(--dashkit-border);
+		white-space: nowrap;
+	}
+
+	&__th--actions {
+		width: 1%;
+		white-space: nowrap;
+		text-align: center;
+	}
+
+	tbody {
+		td {
+			padding: 4px 10px;
+			font-size: 12px;
+			color: var(--dashkit-text);
+			border-bottom: 1px solid var(--dashkit-border-subtle);
+			vertical-align: middle;
+			line-height: 1.4;
+		}
+
+		tr:last-child td {
+			border-bottom: none;
+		}
+
+		tr:hover td {
+			background: var(--dashkit-bg-hover) !important;
+		}
+	}
+
+	&--striped tbody tr:nth-child(odd) td {
+		background: var(--dashkit-bg-stripe);
+	}
+
+	&__empty td {
+		padding: 20px 10px;
+		text-align: center;
+		color: var(--dashkit-text-muted);
+		font-style: italic;
+		font-size: 12px;
+	}
+}
+
+/* ── Row actions ───────────────────────────────────────────────── */
+.dashkit-table__actions {
+	white-space: nowrap;
+	text-align: center;
+}
+
+.dashkit-action {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	font-size: 13px;
+	padding: 2px 3px;
+	margin-right: 2px;
+	cursor: pointer;
+	background: none;
+	border: none;
+	border-radius: 3px;
+	text-decoration: none;
+	color: var(--dashkit-action-color);
+	transition:
+		background 0.15s,
+		opacity 0.15s;
+	line-height: 1;
+
+	&__label {
+		display: none;
+	}
+
+	i {
+		font-size: 14px;
+		line-height: 1;
+	}
+
+	&--loading {
+		opacity: 0.45;
+		pointer-events: none;
+	}
+
+	&:hover {
+		opacity: 0.8;
+		background: rgba(0, 0, 0, 0.06);
+	}
+}
+
+/* ── Options panel ─────────────────────────────────────────────── */
+.dashkit-options-panel {
+	display: none;
+	border-bottom: 2px solid var(--dashkit-blue);
+	background: var(--dashkit-bg-subtle);
+
+	&.is-open {
+		display: block;
+	}
+
+	&__inner {
+		padding: 20px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+		gap: 20px;
+	}
+
+	&__row label:not(.dashkit-buttonset__item) {
+		display: block;
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--dashkit-text-muted);
+		margin-bottom: 8px;
+	}
+
+	&__footer {
+		grid-column: 1 / -1;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding-top: 12px;
+		border-top: 1px solid var(--dashkit-border);
+		margin-top: 4px;
+	}
+
+	&__status {
+		font-size: 12px;
+		color: var(--dashkit-text-muted);
+
+		&.is-success {
+			color: var(--dashkit-green);
+		}
+
+		&.is-error {
+			color: var(--dashkit-red);
+		}
+	}
+}
+
+.dashkit-buttonset {
+	display: inline-flex;
+	border: 1px solid var(--dashkit-border-dark);
+	border-radius: 3px;
+	overflow: hidden;
+
+	&__item {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 38px;
+		padding: 0 12px;
+		font-size: 12px;
+		line-height: 1;
+		cursor: pointer;
+		border-right: 1px solid var(--dashkit-border-dark);
+		background: var(--dashkit-bg);
+		transition: all 0.15s;
+		user-select: none;
+
+		&:last-child {
+			border-right: none;
+		}
+
+		input[type="radio"] {
+			display: none;
+		}
+
+		&:has(input:checked) {
+			background: var(--dashkit-selected-bg);
+			color: var(--dashkit-blue);
+		}
+	}
+}
+
+.dashkit-ctrl--toggle {
+	appearance: none;
+	width: 36px;
+	height: 20px;
+	border-radius: 10px;
+	background: var(--dashkit-border-dark);
+	position: relative;
+	cursor: pointer;
+	flex-shrink: 0;
+	transition: background 0.2s;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: var(--dashkit-bg);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+		transition: transform 0.2s;
+	}
+
+	&:checked {
+		background: var(--dashkit-blue);
+
+		&::before {
+			transform: translateX(16px);
+		}
+	}
+}
+
+.dashkit-radio {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+
+	&__item {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		cursor: pointer;
+	}
+}
+
+.dashkit-multicheck {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+
+	&__item {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 2px 8px;
+		border: 1px solid var(--dashkit-border-dark);
+		border-radius: 3px;
+		font-size: 12px;
+		cursor: pointer;
+		background: var(--dashkit-bg);
+		transition: all 0.15s;
+
+		&:has(input:checked) {
+			background: var(--dashkit-selected-bg);
+			border-color: var(--dashkit-blue);
+			color: var(--dashkit-blue);
+		}
+	}
+}
+
+/* ── Chart widget ──────────────────────────────────────────────── */
+.dashkit-chart__wrap {
+	padding: 12px;
+
+	canvas {
+		display: block;
+		width: 100%;
+	}
+}
