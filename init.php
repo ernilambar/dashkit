@@ -64,6 +64,7 @@ if ( ! class_exists( 'DashkitBootstrap', false ) ) {
 				define( 'DASHKIT_URL', plugin_dir_url( $winner_dir . '/init.php' ) );
 			}
 
+			load_textdomain( 'dashkit', $winner_dir . '/languages/dashkit-' . get_locale() . '.mo' );
 			add_action( 'rest_api_init', [ 'Nilambar\\Dashkit\\API\\REST_API', 'register_routes' ] );
 		}
 	}
