@@ -365,7 +365,9 @@ abstract class TabularWidget extends BaseWidget {
 	 */
 	protected function render_row_actions( array $row, array $actions ): void {
 		$row_id = (int) ( $row['id'] ?? 0 );
-
+		?>
+		<div class="dashkit-actions">
+		<?php
 		foreach ( $actions as $key => $action ) :
 			$icon = $action['icon'] ?? '';
 			?>
@@ -414,6 +416,9 @@ abstract class TabularWidget extends BaseWidget {
 			</div>
 			<?php
 		endforeach;
+		?>
+		</div>
+		<?php
 	}
 
 	/**
