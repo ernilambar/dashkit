@@ -475,3 +475,63 @@
 		height: 100%;
 	}
 }
+
+/* ── Progress Circle widget ────────────────────────────────────── */
+.dashkit-progress-circle {
+	padding: 16px;
+
+	&__grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__ring {
+		position: relative;
+		width: 120px;
+		height: 120px;
+
+		svg {
+			transform: rotate(-90deg);
+		}
+	}
+
+	&__track {
+		fill: none;
+		stroke: var(--dashkit-border);
+		stroke-width: 6;
+	}
+
+	&__arc {
+		fill: none;
+		stroke: #6facde;
+		stroke-width: 6;
+		stroke-linecap: round;
+		transition: stroke-dashoffset 0.3s ease;
+	}
+
+	&__value {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 1rem;
+		font-weight: 500;
+		color: var(--dashkit-text);
+		white-space: nowrap;
+	}
+
+	&__caption {
+		font-size: 11px;
+		color: var(--dashkit-text-muted);
+		text-align: center;
+		max-width: 120px;
+	}
+}
