@@ -368,7 +368,9 @@ abstract class TabularWidget extends BaseWidget {
 
 		foreach ( $actions as $key => $action ) :
 			$icon = $action['icon'] ?? '';
-
+			?>
+			<div class="dashkit-action-wrap dashkit-action-wrap--<?php echo esc_attr( $key ); ?>">
+			<?php
 			if ( 'link' === ( $action['type'] ?? '' ) ) :
 				$url = is_callable( $action['url'] ?? null )
 					? ( $action['url'] )( $row )
@@ -408,6 +410,9 @@ abstract class TabularWidget extends BaseWidget {
 				</button>
 				<?php
 			endif;
+			?>
+			</div>
+			<?php
 		endforeach;
 	}
 
