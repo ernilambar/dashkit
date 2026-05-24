@@ -1,104 +1,103 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Dashkit\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Nilambar Sharma <nilambar@outlook.com>\n"
-"Language-Team: Nepali\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-24T06:50:41+00:00\n"
-"PO-Revision-Date: 2026-05-24T06:55:12+00:00\n"
-"Language: ne_NP\n"
-"X-Generator: WP-CLI 2.13.0-alpha-77d421e\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: dashkit\n"
 
 #: src/Core/Manager.php:188
 msgid "Are you sure?"
-msgstr "के तपाईँ निश्चित हुनुहुन्छ?"
+msgstr ""
 
 #: src/Core/Manager.php:189
 msgid "Action failed."
-msgstr "कार्य असफल भयो।"
+msgstr ""
 
 #: src/Core/Manager.php:190
 msgid "Done."
-msgstr "सम्पन्न।"
+msgstr ""
 
 #: src/Core/Manager.php:191
 msgid "Request failed:"
-msgstr "अनुरोध असफल भयो:"
+msgstr ""
 
 #: src/Core/Manager.php:192
 #: src/Widget/TabularWidget.php:126
 msgid "items"
-msgstr "आइटमहरू"
+msgstr ""
 
 #: src/Core/Manager.php:193
 msgid "Save Changes"
-msgstr "परिवर्तनहरू बचत गर्नुहोस्"
+msgstr ""
 
 #: src/Core/Manager.php:194
 msgid "Saving…"
-msgstr "बचत गर्दै…"
+msgstr ""
 
 #: src/Core/Manager.php:195
 msgid "Saved"
-msgstr "बचत गरियो"
+msgstr ""
 
 #: src/Core/Manager.php:196
 msgid "Error"
-msgstr "त्रुटि"
+msgstr ""
 
 #: src/Core/Manager.php:197
 msgid "Save failed."
-msgstr "बचत गर्न असफल भयो।"
+msgstr ""
 
 #: src/Core/Manager.php:198
 msgid "Widget options saved."
-msgstr "विजेट विकल्पहरू बचत गरियो।"
+msgstr ""
 
 #: src/Widget/BaseWidget.php:344
 msgid "Options"
-msgstr "विकल्पहरू"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:122
 #: src/Widget/TabularWidget.php:209
 msgid "Search…"
-msgstr "खोज्नुहोस्…"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:239
 msgid "Loading…"
-msgstr "लोड हुँदैछ…"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:263
 msgid "Actions"
-msgstr "कार्यहरू"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:332
 msgid "ID"
-msgstr "आईडी"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:336
 msgid "Title"
-msgstr "शीर्षक"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:340
 msgid "Date"
-msgstr "मिति"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:458
 msgid "Rows per Page"
-msgstr "प्रति पृष्ठ पङ्क्तिहरू"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:481
 msgid "Ordering"
-msgstr "क्रम"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:486
 msgid "Descending"
-msgstr "घट्दो क्रम"
+msgstr ""
 
 #: src/Widget/TabularWidget.php:490
 msgid "Ascending"
-msgstr "बढ्दो क्रम"
+msgstr ""

@@ -32,6 +32,6 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
-    "format": "prettier \"**/*.{css,js,json,mjs}\" --write --log-level warn"
+    "format": "prettier \"**/*.{cjs,css,js,json,mjs}\" --write --log-level warn"
   }
 }

@@ -30,7 +30,7 @@
     "make-mo": "./vendor/bin/wp i18n make-mo languages/",
     "phpcs": "@php ./vendor/bin/phpcs --report-full --report-summary",
     "pot": "./vendor/bin/wp i18n make-pot . --exclude=assets,node_modules,third-party,vendor --headers='{\"POT-Creation-Date\":\"\"}'",
-    "update-po": "./vendor/bin/wp i18n update-po languages/dashkit.pot languages/"
+    "update-po": "./vendor/bin/wp i18n update-po dashkit.pot languages/"
   },
   "config": {
     "allow-plugins": {
