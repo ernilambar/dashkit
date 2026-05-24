@@ -343,6 +343,7 @@ abstract class BaseWidget {
 					</span>
 				<?php endif; ?>
 			</h3>
+			<?php if ( ! empty( $this->get_options_schema() ) ) : ?>
 			<div class="dashkit-widget__header-actions">
 				<button class="dashkit-widget__options-toggle"
 						title="<?php echo esc_attr__( 'Options', 'dashkit' ); ?>"
@@ -350,6 +351,7 @@ abstract class BaseWidget {
 					<i class="ri-settings-3-line"></i>
 				</button>
 			</div>
+			<?php endif; ?>
 		</div>
 		<?php
 	}
