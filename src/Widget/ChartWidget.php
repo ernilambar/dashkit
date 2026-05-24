@@ -107,8 +107,7 @@ abstract class ChartWidget extends BaseWidget {
 		<canvas id="<?php echo esc_attr( $chart_id ); ?>"
 				class="dashkit-chart__canvas"
 				data-chart-type="bar"
-				data-chart-data="<?php echo esc_attr( $data ); ?>"
-				style="max-height:<?php echo (int) $opts['height']; ?>px;">
+				data-chart-data="<?php echo esc_attr( $data ); ?>">
 		</canvas>
 		<?php
 	}
@@ -121,7 +120,7 @@ abstract class ChartWidget extends BaseWidget {
 	public function render(): void {
 		?>
 		<div class="dashkit-chart-widget">
-			<div class="dashkit-chart__wrap">
+			<div class="dashkit-chart__wrap" style="height:<?php echo (int) $opts['height']; ?>px;">
 				<?php $this->render_canvas(); ?>
 			</div>
 		</div>
