@@ -481,9 +481,10 @@
 	padding: 16px;
 
 	&__grid {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(4, 120px);
 		gap: 24px;
+		justify-content: start;
 	}
 
 	&__item {
