@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-05-24T06:50:41+00:00\n"
-"PO-Revision-Date: 2026-05-24T06:55:12+00:00\n"
+"PO-Revision-Date: 2026-05-24T18:31:24+00:00\n"
 "Language: ne_NP\n"
 "X-Generator: WP-CLI 2.13.0-alpha-77d421e\n"
 "X-Domain: dashkit\n"
@@ -30,7 +30,6 @@ msgid "Request failed:"
 msgstr "अनुरोध असफल भयो:"
 
 #: src/Core/Manager.php:192
-#: src/Widget/TabularWidget.php:126
 msgid "items"
 msgstr "आइटमहरू"
 
@@ -58,47 +57,30 @@ msgstr "बचत गर्न असफल भयो।"
 msgid "Widget options saved."
 msgstr "विजेट विकल्पहरू बचत गरियो।"
 
-#: src/Widget/BaseWidget.php:344
+#: src/Widget/BaseWidget.php:348
 msgid "Options"
 msgstr "विकल्पहरू"
 
-#: src/Widget/TabularWidget.php:122
-#: src/Widget/TabularWidget.php:209
-msgid "Search…"
-msgstr "खोज्नुहोस्…"
-
-#: src/Widget/TabularWidget.php:239
+#: src/Widget/TabularWidget.php:152
 msgid "Loading…"
 msgstr "लोड हुँदैछ…"
 
-#: src/Widget/TabularWidget.php:263
+#: src/Widget/TabularWidget.php:260
 msgid "Actions"
 msgstr "कार्यहरू"
 
-#: src/Widget/TabularWidget.php:332
+#: src/Widget/TabularWidget.php:329
 msgid "ID"
 msgstr "आईडी"
 
-#: src/Widget/TabularWidget.php:336
+#: src/Widget/TabularWidget.php:333
 msgid "Title"
 msgstr "शीर्षक"
 
-#: src/Widget/TabularWidget.php:340
+#: src/Widget/TabularWidget.php:337
 msgid "Date"
 msgstr "मिति"
 
-#: src/Widget/TabularWidget.php:458
-msgid "Rows per Page"
-msgstr "प्रति पृष्ठ पङ्क्तिहरू"
-
-#: src/Widget/TabularWidget.php:481
-msgid "Ordering"
-msgstr "क्रम"
-
-#: src/Widget/TabularWidget.php:486
-msgid "Descending"
-msgstr "घट्दो क्रम"
-
-#: src/Widget/TabularWidget.php:490
-msgid "Ascending"
-msgstr "बढ्दो क्रम"
+#: src/Widget/TabularWidget.php:446
+msgid "No data found."
+msgstr ""

@@ -13,7 +13,7 @@ namespace Nilambar\Dashkit\Widget;
  * Class ProgressCircleWidget
  *
  * Renders a row of SVG progress circles, each with a value in the centre
- * and a caption below. Override get_items() to supply data.
+ * and a caption below. Subclasses must implement get_data() to supply data.
  *
  * @since 1.0.0
  */
@@ -29,22 +29,9 @@ abstract class ProgressCircleWidget extends BaseWidget {
 	}
 
 	/**
-	 * Return developer-controlled config (items locked here, not user-editable).
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function get_widget_config(): array {
-		return [
-			'items' => $this->get_items(),
-		];
-	}
-
-	/**
 	 * Return the circle items to display.
 	 *
-	 * Override in subclasses to supply real data. Each item must have:
+	 * Each item must have:
 	 *   - value      (string) — text shown inside the circle
 	 *   - caption    (string) — label shown below the circle
 	 *   - percentage (int)    — 0–100, controls how much of the arc is filled
@@ -53,31 +40,7 @@ abstract class ProgressCircleWidget extends BaseWidget {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function get_items(): array {
-		return [];
-	}
-
-	/**
-	 * Return default options.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function get_default_options(): array {
-		return [];
-	}
-
-	/**
-	 * Return the options schema.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array<int, array<string, mixed>>
-	 */
-	public function get_options_schema(): array {
-		return [];
-	}
+	abstract public function get_data(): array;
 
 	/**
 	 * Render the progress circle widget HTML.
@@ -85,7 +48,7 @@ abstract class ProgressCircleWidget extends BaseWidget {
 	 * @since 1.0.0
 	 */
 	public function render(): void {
-		$items = $this->get_option( 'items', [] );
+		$items = $this->get_data();
 
 		if ( empty( $items ) ) {
 			return;

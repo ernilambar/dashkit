@@ -12,7 +12,7 @@ namespace Nilambar\Dashkit\Widget;
 /**
  * Class ChartWidget
  *
- * Override get_chart_data() to supply real datasets.
+ * Subclasses must implement get_data() to supply datasets.
  *
  * @since 1.0.0
  */
@@ -41,17 +41,6 @@ abstract class ChartWidget extends BaseWidget {
 	}
 
 	/**
-	 * Return default options.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function get_default_options(): array {
-		return [];
-	}
-
-	/**
 	 * Return data for the async /widget-data REST response.
 	 *
 	 * @since 1.0.0
@@ -60,39 +49,25 @@ abstract class ChartWidget extends BaseWidget {
 	 */
 	public function get_rest_data(): array {
 		return [
-			'chart_data' => $this->get_chart_data(),
+			'chart_data' => $this->get_data(),
 		];
 	}
 
 	/**
-	 * Return the options schema.
+	 * Return the chart type (bar, line, etc.).
 	 *
 	 * @since 1.0.0
-	 *
-	 * @return array<int, array<string, mixed>>
 	 */
-	public function get_options_schema(): array {
-		return [];
-	}
+	abstract public function get_chart_type(): string;
 
 	/**
-	 * Override to return real chart data.
+	 * Return chart data. Must be implemented by subclasses.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return array{ labels: string[], datasets: array[] }
 	 */
-	public function get_chart_data(): array {
-		return [
-			'labels'   => [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun' ],
-			'datasets' => [
-				[
-					'label' => 'Sample Data',
-					'data'  => [ 12, 19, 8, 15, 24, 17 ],
-				],
-			],
-		];
-	}
+	abstract public function get_data(): array;
 
 	/**
 	 * Render the canvas element. Override in subclasses to add extra data attributes.
@@ -100,13 +75,12 @@ abstract class ChartWidget extends BaseWidget {
 	 * @since 1.0.0
 	 */
 	public function render_canvas(): void {
-		$opts     = $this->options;
 		$chart_id = 'dashkit-chart-' . esc_attr( $this->id );
-		$data     = wp_json_encode( $this->get_chart_data() );
+		$data     = wp_json_encode( $this->get_data() );
 		?>
 		<canvas id="<?php echo esc_attr( $chart_id ); ?>"
 				class="dashkit-chart__canvas"
-				data-chart-type="bar"
+				data-chart-type="<?php echo esc_attr( $this->get_chart_type() ); ?>"
 				data-chart-data="<?php echo esc_attr( $data ); ?>">
 		</canvas>
 		<?php
@@ -120,7 +94,7 @@ abstract class ChartWidget extends BaseWidget {
 	public function render(): void {
 		?>
 		<div class="dashkit-chart-widget">
-			<div class="dashkit-chart__wrap" style="height:<?php echo (int) $opts['height']; ?>px;">
+			<div class="dashkit-chart__wrap" style="height:<?php echo (int) $this->options['height']; ?>px;">
 				<?php $this->render_canvas(); ?>
 			</div>
 		</div>

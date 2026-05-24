@@ -13,7 +13,7 @@ namespace Nilambar\Dashkit\Widget;
  * Class TabularWidget
  *
  * Subclass and override:
- *   get_rows()           — supply your data
+ *   get_data()           — supply your data
  *   get_columns_config() — define column keys and labels
  *   format_cell()        — custom cell rendering
  *   get_actions()        — declare available row actions
@@ -32,22 +32,9 @@ abstract class TabularWidget extends BaseWidget {
 	}
 
 	/**
-	 * Return default options.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function get_default_options(): array {
-		return [
-			'per_page' => 10,
-		];
-	}
-
-	/**
 	 * Return developer-controlled config that always overrides stored options.
 	 *
-	 * Override in subclasses to enable filterable, pagination, etc.
+	 * Override in subclasses to enable pagination, etc.
 	 *
 	 * @since 1.0.0
 	 *
@@ -56,7 +43,6 @@ abstract class TabularWidget extends BaseWidget {
 	public function get_widget_config(): array {
 		return [
 			'columns'    => $this->get_active_columns(),
-			'filterable' => false,
 			'striped'    => true,
 			'pagination' => false,
 		];
@@ -77,19 +63,6 @@ abstract class TabularWidget extends BaseWidget {
 	}
 
 	/**
-	 * Return the options schema.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array<int, array<string, mixed>>
-	 */
-	public function get_options_schema(): array {
-		return [
-			$this->get_common_field( 'per_page' ),
-		];
-	}
-
-	/**
 	 * Render the table widget HTML.
 	 *
 	 * @since 1.0.0
@@ -102,56 +75,16 @@ abstract class TabularWidget extends BaseWidget {
 
 		$opts    = $this->options;
 		$columns = $this->get_visible_columns();
-		$rows    = $this->get_rows();
+		$rows    = $this->get_data();
 		$actions = $this->get_actions();
-
-		$css = 'dashkit-table-widget';
-		if ( $opts['striped'] ) {
-			$css .= ' dashkit-table--striped';
-		}
 		?>
-		<div class="<?php echo esc_attr( $css ); ?>">
+		<div class="<?php echo esc_attr( $this->get_table_css() ); ?>">
 
 			<?php if ( ! empty( $rows ) ) : ?>
 
-				<?php if ( $opts['filterable'] ) : ?>
-					<div class="dashkit-table__toolbar">
-						<input
-							type="search"
-							class="dashkit-table__search"
-							placeholder="<?php echo esc_attr__( 'Search…', 'dashkit' ); ?>"
-							data-dashkit-table-search
-						/>
-						<span class="dashkit-table__count" data-dashkit-row-count>
-							<?php echo count( $rows ); ?> <?php echo esc_html__( 'items', 'dashkit' ); ?>
-						</span>
-					</div>
-				<?php endif; ?>
-
 				<div class="dashkit-table__wrap">
-					<table class="dashkit-table"
-							data-per-page="<?php echo (int) $opts['per_page']; ?>"
-							data-widget-id="<?php echo esc_attr( $this->id ); ?>"
-							data-page-slug="<?php echo esc_attr( $this->page_slug ); ?>"
-							data-rest-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
-						<thead class="dashkit-table__thead">
-							<tr class="dashkit-table__header-row">
-								<?php foreach ( $columns as $col ) : ?>
-									<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>"
-									<?php
-									if ( ! empty( $col['width'] ) ) :
-										?>
-										style="width:<?php echo esc_attr( $col['width'] ); ?>"<?php endif; ?>>
-										<?php echo esc_html( $col['label'] ); ?>
-									</th>
-								<?php endforeach; ?>
-								<?php if ( ! empty( $actions ) ) : ?>
-									<th class="dashkit-table__th dashkit-table__th--actions">
-										<?php echo esc_html( $this->get_actions_label() ); ?>
-									</th>
-								<?php endif; ?>
-							</tr>
-						</thead>
+					<?php $this->render_table_open(); ?>
+						<?php $this->render_thead( $columns, $actions ); ?>
 						<tbody class="dashkit-table__tbody">
 							<?php foreach ( $rows as $row ) : ?>
 								<tr class="dashkit-table__row <?php echo esc_attr( $this->get_row_class( $row ) ); ?>" data-row-id="<?php echo esc_attr( $row['id'] ?? '' ); ?>">
@@ -174,17 +107,14 @@ abstract class TabularWidget extends BaseWidget {
 						if ( '' !== $footer ) :
 							?>
 						<tfoot class="dashkit-table__tfoot">
-							<tr><td colspan="<?php echo count( $columns ) + ( ! empty( $actions ) ? 1 : 0 ); ?>"><?php echo $footer; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td></tr>
+							<tr><td colspan="<?php echo $this->get_total_columns( $columns, $actions ); ?>"><?php echo $footer; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td></tr>
 						</tfoot>
 						<?php endif; ?>
 					</table>
 				</div>
 
 				<?php if ( $opts['pagination'] ) : ?>
-					<div class="dashkit-table__pagination tablenav" data-dashkit-pagination
-						data-total="<?php echo count( $rows ); ?>"
-						data-per-page="<?php echo (int) $opts['per_page']; ?>">
-					</div>
+					<?php $this->render_pagination( count( $rows ) ); ?>
 				<?php endif; ?>
 
 			<?php else : ?>
@@ -206,57 +136,19 @@ abstract class TabularWidget extends BaseWidget {
 	 *
 	 * @since 1.0.0
 	 */
-	private function render_lazy_shell(): void {
+	protected function render_lazy_shell(): void {
 		$opts    = $this->options;
 		$columns = $this->get_visible_columns();
 		$actions = $this->get_actions();
-
-		$css = 'dashkit-table-widget';
-		if ( $opts['striped'] ) {
-			$css .= ' dashkit-table--striped';
-		}
 		?>
-		<div class="<?php echo esc_attr( $css ); ?>">
-
-			<?php if ( $opts['filterable'] ) : ?>
-				<div class="dashkit-table__toolbar">
-					<input
-						type="search"
-						class="dashkit-table__search"
-						placeholder="<?php echo esc_attr__( 'Search…', 'dashkit' ); ?>"
-						data-dashkit-table-search
-					/>
-					<span class="dashkit-table__count" data-dashkit-row-count></span>
-				</div>
-			<?php endif; ?>
+		<div class="<?php echo esc_attr( $this->get_table_css() ); ?>">
 
 			<div class="dashkit-table__wrap">
-				<table class="dashkit-table"
-						data-per-page="<?php echo (int) $opts['per_page']; ?>"
-						data-widget-id="<?php echo esc_attr( $this->id ); ?>"
-						data-page-slug="<?php echo esc_attr( $this->page_slug ); ?>"
-						data-rest-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
-					<thead class="dashkit-table__thead">
-						<tr class="dashkit-table__header-row">
-							<?php foreach ( $columns as $col ) : ?>
-								<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>"
-								<?php
-								if ( ! empty( $col['width'] ) ) :
-									?>
-									style="width:<?php echo esc_attr( $col['width'] ); ?>"<?php endif; ?>>
-									<?php echo esc_html( $col['label'] ); ?>
-								</th>
-							<?php endforeach; ?>
-							<?php if ( ! empty( $actions ) ) : ?>
-								<th class="dashkit-table__th dashkit-table__th--actions">
-									<?php echo esc_html( $this->get_actions_label() ); ?>
-								</th>
-							<?php endif; ?>
-						</tr>
-					</thead>
+				<?php $this->render_table_open(); ?>
+					<?php $this->render_thead( $columns, $actions ); ?>
 					<tbody class="dashkit-table__tbody">
 						<tr class="dashkit-table__loading">
-							<td colspan="<?php echo count( $columns ) + ( ! empty( $actions ) ? 1 : 0 ); ?>">
+							<td colspan="<?php echo (int) $this->get_total_columns( $columns, $actions ); ?>">
 								<?php echo esc_html__( 'Loading…', 'dashkit' ); ?>
 							</td>
 						</tr>
@@ -265,14 +157,98 @@ abstract class TabularWidget extends BaseWidget {
 			</div>
 
 			<?php if ( $opts['pagination'] ) : ?>
-				<div class="dashkit-table__pagination tablenav" data-dashkit-pagination
-					data-total="0"
-					data-per-page="<?php echo (int) $opts['per_page']; ?>">
-				</div>
+				<?php $this->render_pagination( 0 ); ?>
 			<?php endif; ?>
 
 		</div>
 		<?php
+	}
+
+	/**
+	 * Return the CSS class string for the widget wrapper.
+	 *
+	 * @since 1.0.0
+	 */
+	private function get_table_css(): string {
+		$css = 'dashkit-table-widget';
+		if ( $this->options['striped'] ) {
+			$css .= ' dashkit-table--striped';
+		}
+		return $css;
+	}
+
+	/**
+	 * Render the opening <table> tag with all data attributes.
+	 *
+	 * Caller is responsible for closing </table>.
+	 *
+	 * @since 1.0.0
+	 */
+	private function render_table_open(): void {
+		?>
+		<table class="dashkit-table"
+				data-widget-id="<?php echo esc_attr( $this->id ); ?>"
+				data-page-slug="<?php echo esc_attr( $this->page_slug ); ?>"
+				data-rest-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
+		<?php
+	}
+
+	/**
+	 * Render the table <thead> block.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<int, array<string, string>>   $columns Visible columns.
+	 * @param array<string, array<string, mixed>> $actions Active row actions.
+	 */
+	private function render_thead( array $columns, array $actions ): void {
+		?>
+		<thead class="dashkit-table__thead">
+			<tr class="dashkit-table__header-row">
+				<?php foreach ( $columns as $col ) : ?>
+					<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>"
+					<?php
+					if ( ! empty( $col['width'] ) ) :
+						?>
+						style="width:<?php echo esc_attr( $col['width'] ); ?>"<?php endif; ?>>
+						<?php echo esc_html( $col['label'] ); ?>
+					</th>
+				<?php endforeach; ?>
+				<?php if ( ! empty( $actions ) ) : ?>
+					<th class="dashkit-table__th dashkit-table__th--actions">
+						<?php echo esc_html( $this->get_actions_label() ); ?>
+					</th>
+				<?php endif; ?>
+			</tr>
+		</thead>
+		<?php
+	}
+
+	/**
+	 * Render the pagination controls block.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $total Total row count.
+	 */
+	private function render_pagination( int $total ): void {
+		?>
+		<div class="dashkit-table__pagination tablenav" data-dashkit-pagination
+			data-total="<?php echo (int) $total; ?>">
+		</div>
+		<?php
+	}
+
+	/**
+	 * Return total column count including the actions column.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<int, array<string, string>>   $columns Visible columns.
+	 * @param array<string, array<string, mixed>> $actions Active row actions.
+	 */
+	private function get_total_columns( array $columns, array $actions ): int {
+		return count( $columns ) + ( ! empty( $actions ) ? 1 : 0 );
 	}
 
 	/**
@@ -291,7 +267,7 @@ abstract class TabularWidget extends BaseWidget {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function get_rows(): array {
+	public function get_data(): array {
 		return [];
 	}
 
@@ -319,7 +295,7 @@ abstract class TabularWidget extends BaseWidget {
 	 */
 	public function get_rendered_rows(): array {
 		$columns = $this->get_visible_columns();
-		$rows    = $this->get_rows();
+		$rows    = $this->get_data();
 		$actions = $this->get_actions();
 		$result  = [];
 
@@ -331,7 +307,7 @@ abstract class TabularWidget extends BaseWidget {
 			if ( ! empty( $actions ) ) {
 				ob_start();
 				$this->render_row_actions( $row, $actions );
-				$rendered['_actions_html'] = ob_get_clean();
+				$rendered['_actions_html'] = (string) ob_get_clean();
 			}
 			$result[] = $rendered;
 		}
@@ -390,7 +366,8 @@ abstract class TabularWidget extends BaseWidget {
 		<div class="dashkit-actions">
 		<?php
 		foreach ( $actions as $key => $action ) :
-			$icon = $action['icon'] ?? '';
+			$icon  = $action['icon'] ?? '';
+			$title = $action['title'] ?? '';
 			?>
 			<div class="dashkit-action-wrap dashkit-action-wrap--<?php echo esc_attr( $key ); ?>">
 			<?php
@@ -401,11 +378,11 @@ abstract class TabularWidget extends BaseWidget {
 				?>
 				<a href="<?php echo esc_url( $url ); ?>"
 					class="dashkit-action dashkit-action--<?php echo esc_attr( $key ); ?>"
-					title="<?php echo esc_attr( $action['title'] ); ?>">
+					title="<?php echo esc_attr( $title ); ?>">
 					<?php if ( $icon ) : ?>
 						<i class="ri-<?php echo esc_attr( $icon ); ?>"></i>
 					<?php endif; ?>
-					<span class="dashkit-action__label"><?php echo esc_html( $action['title'] ); ?></span>
+					<span class="dashkit-action__label"><?php echo esc_html( $title ); ?></span>
 				</a>
 				<?php
 			else :
@@ -417,7 +394,7 @@ abstract class TabularWidget extends BaseWidget {
 				?>
 				<button type="button"
 						class="dashkit-action dashkit-action--<?php echo esc_attr( $key ); ?> <?php echo $extra; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
-						title="<?php echo esc_attr( $action['title'] ); ?>"
+						title="<?php echo esc_attr( $title ); ?>"
 						data-dashkit-action="<?php echo esc_attr( $key ); ?>"
 						data-row-id="<?php echo absint( $row_id ); ?>"
 						data-after="<?php echo $after; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
@@ -429,7 +406,7 @@ abstract class TabularWidget extends BaseWidget {
 					<?php if ( $icon ) : ?>
 						<i class="ri-<?php echo esc_attr( $icon ); ?>"></i>
 					<?php endif; ?>
-					<span class="dashkit-action__label"><?php echo esc_html( $action['title'] ); ?></span>
+					<span class="dashkit-action__label"><?php echo esc_html( $title ); ?></span>
 				</button>
 				<?php
 			endif;
@@ -458,64 +435,6 @@ abstract class TabularWidget extends BaseWidget {
 				fn( $col ) => null !== $col
 			)
 		);
-	}
-
-	/**
-	 * Return a reusable field definition for a named common field type.
-	 *
-	 * Reduces boilerplate in get_options_schema() implementations. Supported
-	 * types: 'per_page', 'ordering'.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string               $type    Field type key.
-	 * @param array<string, mixed> $options Overrides merged into the returned definition.
-	 * @return array<string, mixed>
-	 */
-	protected function get_common_field( string $type, array $options = [] ): array {
-		$definitions = [
-			'per_page' => [
-				'key'     => 'per_page',
-				'label'   => __( 'Rows per Page', 'dashkit' ),
-				'type'    => 'buttonset',
-				'choices' => [
-					[
-						'value' => 5,
-						'label' => '5',
-					],
-					[
-						'value' => 10,
-						'label' => '10',
-					],
-					[
-						'value' => 20,
-						'label' => '20',
-					],
-					[
-						'value' => 30,
-						'label' => '30',
-					],
-				],
-			],
-			'ordering' => [
-				'key'     => 'ordering',
-				'label'   => __( 'Ordering', 'dashkit' ),
-				'type'    => 'buttonset',
-				'choices' => [
-					[
-						'value' => 'DESC',
-						'label' => __( 'Descending', 'dashkit' ),
-					],
-					[
-						'value' => 'ASC',
-						'label' => __( 'Ascending', 'dashkit' ),
-					],
-				],
-			],
-		];
-
-		$base = $definitions[ $type ] ?? [];
-		return array_merge( $base, $options );
 	}
 
 	/**
