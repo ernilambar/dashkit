@@ -482,9 +482,9 @@
 
 	&__grid {
 		display: grid;
-		grid-template-columns: repeat(4, 120px);
+		grid-template-columns: repeat(auto-fit, 120px);
+		max-width: calc(4 * 120px + 3 * 24px);
 		gap: 24px;
-		justify-content: start;
 	}
 
 	&__item {
