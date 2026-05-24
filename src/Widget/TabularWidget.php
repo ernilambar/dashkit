@@ -137,7 +137,11 @@ abstract class TabularWidget extends BaseWidget {
 						<thead class="dashkit-table__thead">
 							<tr class="dashkit-table__header-row">
 								<?php foreach ( $columns as $col ) : ?>
-									<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>">
+									<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>"
+									<?php
+									if ( ! empty( $col['width'] ) ) :
+										?>
+										style="width:<?php echo esc_attr( $col['width'] ); ?>"<?php endif; ?>>
 										<?php echo esc_html( $col['label'] ); ?>
 									</th>
 								<?php endforeach; ?>
@@ -150,7 +154,7 @@ abstract class TabularWidget extends BaseWidget {
 						</thead>
 						<tbody class="dashkit-table__tbody">
 							<?php foreach ( $rows as $row ) : ?>
-								<tr class="dashkit-table__row" data-row-id="<?php echo esc_attr( $row['id'] ?? '' ); ?>">
+								<tr class="dashkit-table__row <?php echo esc_attr( $this->get_row_class( $row ) ); ?>" data-row-id="<?php echo esc_attr( $row['id'] ?? '' ); ?>">
 									<?php foreach ( $columns as $col ) : ?>
 										<td class="dashkit-table__cell dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>" data-col="<?php echo esc_attr( $col['key'] ); ?>">
 											<?php echo $this->format_cell( $col['key'], $row[ $col['key'] ] ?? '', $row ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -165,6 +169,14 @@ abstract class TabularWidget extends BaseWidget {
 								</tr>
 							<?php endforeach; ?>
 						</tbody>
+						<?php
+						$footer = $this->get_table_footer();
+						if ( '' !== $footer ) :
+							?>
+						<tfoot class="dashkit-table__tfoot">
+							<tr><td colspan="<?php echo count( $columns ) + ( ! empty( $actions ) ? 1 : 0 ); ?>"><?php echo $footer; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td></tr>
+						</tfoot>
+						<?php endif; ?>
 					</table>
 				</div>
 
@@ -175,6 +187,11 @@ abstract class TabularWidget extends BaseWidget {
 					</div>
 				<?php endif; ?>
 
+			<?php else : ?>
+				<?php $empty_message = $this->get_empty_message(); ?>
+				<?php if ( '' !== $empty_message ) : ?>
+					<p class="dashkit-table__empty"><?php echo esc_html( $empty_message ); ?></p>
+				<?php endif; ?>
 			<?php endif; ?>
 
 		</div>
@@ -222,7 +239,11 @@ abstract class TabularWidget extends BaseWidget {
 					<thead class="dashkit-table__thead">
 						<tr class="dashkit-table__header-row">
 							<?php foreach ( $columns as $col ) : ?>
-								<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>">
+								<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>"
+								<?php
+								if ( ! empty( $col['width'] ) ) :
+									?>
+									style="width:<?php echo esc_attr( $col['width'] ); ?>"<?php endif; ?>>
 									<?php echo esc_html( $col['label'] ); ?>
 								</th>
 							<?php endforeach; ?>
@@ -495,5 +516,34 @@ abstract class TabularWidget extends BaseWidget {
 
 		$base = $definitions[ $type ] ?? [];
 		return array_merge( $base, $options );
+	}
+
+	/**
+	 * Return the message shown when there are no rows. Override in subclass.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_empty_message(): string {
+		return __( 'No data found.', 'dashkit' );
+	}
+
+	/**
+	 * Return extra CSS classes for a table row. Override in subclass.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<string, mixed> $row Row data.
+	 */
+	public function get_row_class( array $row ): string {
+		return '';
+	}
+
+	/**
+	 * Return HTML for the table footer row. Return empty string to omit the footer.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_table_footer(): string {
+		return '';
 	}
 }
