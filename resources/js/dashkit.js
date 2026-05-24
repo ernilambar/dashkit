@@ -1,7 +1,30 @@
 import "../css/dashkit.css";
 import "toastle/style.css";
 import Toastle from "toastle";
-import { Chart } from "chart.js/auto";
+import {
+	Chart,
+	BarController,
+	BarElement,
+	LineController,
+	LineElement,
+	PointElement,
+	CategoryScale,
+	LinearScale,
+	Tooltip,
+	Legend,
+} from "chart.js";
+
+Chart.register(
+	BarController,
+	BarElement,
+	LineController,
+	LineElement,
+	PointElement,
+	CategoryScale,
+	LinearScale,
+	Tooltip,
+	Legend,
+);
 
 const REST = dashkitConfig.restUrl;
 const NONCE = dashkitConfig.nonce;
