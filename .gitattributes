@@ -3,8 +3,10 @@
 .gitattributes export-ignore
 .gitignore export-ignore
 CLAUDE.md export-ignore
+dashkit.pot export-ignore
 package.json export-ignore
 pnpm-lock.yaml export-ignore
+pnpm-workspace.yaml export-ignore
 postcss.config.cjs export-ignore
 resources export-ignore
 vite.config.js export-ignore
