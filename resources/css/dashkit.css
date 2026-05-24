@@ -258,13 +258,21 @@
 	text-align: center;
 }
 
+.dashkit-action-wrap {
+	display: inline-block;
+	margin-right: 2px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
 .dashkit-action {
 	display: inline-flex;
 	align-items: center;
 	gap: 3px;
 	font-size: 13px;
 	padding: 2px 3px;
-	margin-right: 2px;
 	cursor: pointer;
 	background: none;
 	border: none;
