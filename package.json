@@ -1,42 +1,37 @@
 {
-	"name": "dashkit",
-	"version": "1.0.0",
-	"description": "Reusable widget engine for WordPress admin pages.",
-	"author": "Nilambar Sharma",
-	"license": "GPL-2.0-or-later",
-	"homepage": "https://github.com/ernilambar/dashkit",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ernilambar/dashkit.git"
-	},
-	"bugs": {
-		"url": "https://github.com/ernilambar/dashkit/issues"
-	},
-	"engines": {
-		"node": ">=22"
-	},
-	"browserslist": "> 2%, last 2 versions, not dead",
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
-	},
-	"dependencies": {
-		"chart.js": "^4.0.0",
-		"toastle": "^2.1.0"
-	},
-	"devDependencies": {
-		"@wordpress/prettier-config": "^4.45.0",
-		"browserslist-to-esbuild": "^2.1.1",
-		"postcss": "^8.5.14",
-		"postcss-nested": "^7.0.2",
-		"postcss-preset-env": "^11.2.1",
-		"prettier": "npm:wp-prettier@^3.0.3",
-		"vite": "^8.0.12"
-	},
-	"scripts": {
-		"build": "vite build",
-		"dev": "vite build --watch",
-		"format": "prettier \"**/*.{css,js,json,mjs}\" --write --log-level warn"
-	}
+  "name": "dashkit",
+  "version": "1.0.0",
+  "description": "Reusable widget engine for WordPress admin pages.",
+  "author": "Nilambar Sharma",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://github.com/ernilambar/dashkit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ernilambar/dashkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ernilambar/dashkit/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "browserslist": "> 2%, last 2 versions, not dead",
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "toastle": "^2.1.0"
+  },
+  "devDependencies": {
+    "@wordpress/prettier-config": "^4.46.0",
+    "browserslist-to-esbuild": "^2.1.1",
+    "postcss": "^8.5.14",
+    "postcss-nested": "^7.0.2",
+    "postcss-preset-env": "^11.3.0",
+    "prettier": "npm:wp-prettier@^3.0.3",
+    "vite": "^8.0.13"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "format": "prettier \"**/*.{css,js,json,mjs}\" --write --log-level warn"
+  }
 }

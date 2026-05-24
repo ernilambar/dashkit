@@ -15,7 +15,8 @@
 	--dashkit-red: #d63638;
 	--dashkit-yellow: #dba617;
 	--dashkit-radius: 4px;
-	--dashkit-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--dashkit-shadow: 0 1px 3px rgba(0, 0, 0, 0.07),
+		0 1px 2px rgba(0, 0, 0, 0.04);
 	--dashkit-border-subtle: #f0f0f1;
 	--dashkit-bg-hover: #f0f6fc;
 	--dashkit-bg-stripe: #fafafa;

@@ -105,6 +105,7 @@ abstract class ChartWidget extends BaseWidget {
 		$data     = wp_json_encode( $this->get_chart_data() );
 		?>
 		<canvas id="<?php echo esc_attr( $chart_id ); ?>"
+				class="dashkit-chart__canvas"
 				data-chart-type="bar"
 				data-chart-data="<?php echo esc_attr( $data ); ?>"
 				style="max-height:<?php echo (int) $opts['height']; ?>px;">

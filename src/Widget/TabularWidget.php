@@ -134,31 +134,31 @@ abstract class TabularWidget extends BaseWidget {
 							data-widget-id="<?php echo esc_attr( $this->id ); ?>"
 							data-page-slug="<?php echo esc_attr( $this->page_slug ); ?>"
 							data-rest-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
-						<thead>
-							<tr>
+						<thead class="dashkit-table__thead">
+							<tr class="dashkit-table__header-row">
 								<?php foreach ( $columns as $col ) : ?>
-									<th scope="col">
+									<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>">
 										<?php echo esc_html( $col['label'] ); ?>
 									</th>
 								<?php endforeach; ?>
 								<?php if ( ! empty( $actions ) ) : ?>
-									<th class="dashkit-table__th--actions">
+									<th class="dashkit-table__th dashkit-table__th--actions">
 										<?php echo esc_html( $this->get_actions_label() ); ?>
 									</th>
 								<?php endif; ?>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="dashkit-table__tbody">
 							<?php foreach ( $rows as $row ) : ?>
-								<tr data-row-id="<?php echo esc_attr( $row['id'] ?? '' ); ?>">
+								<tr class="dashkit-table__row" data-row-id="<?php echo esc_attr( $row['id'] ?? '' ); ?>">
 									<?php foreach ( $columns as $col ) : ?>
-										<td data-col="<?php echo esc_attr( $col['key'] ); ?>">
+										<td class="dashkit-table__cell dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>" data-col="<?php echo esc_attr( $col['key'] ); ?>">
 											<?php echo $this->format_cell( $col['key'], $row[ $col['key'] ] ?? '', $row ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 										</td>
 									<?php endforeach; ?>
 
 									<?php if ( ! empty( $actions ) ) : ?>
-										<td class="dashkit-table__actions">
+										<td class="dashkit-table__cell dashkit-table__actions">
 											<?php $this->render_row_actions( $row, $actions ); ?>
 										</td>
 									<?php endif; ?>
@@ -219,21 +219,21 @@ abstract class TabularWidget extends BaseWidget {
 						data-widget-id="<?php echo esc_attr( $this->id ); ?>"
 						data-page-slug="<?php echo esc_attr( $this->page_slug ); ?>"
 						data-rest-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
-					<thead>
-						<tr>
+					<thead class="dashkit-table__thead">
+						<tr class="dashkit-table__header-row">
 							<?php foreach ( $columns as $col ) : ?>
-								<th scope="col">
+								<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>">
 									<?php echo esc_html( $col['label'] ); ?>
 								</th>
 							<?php endforeach; ?>
 							<?php if ( ! empty( $actions ) ) : ?>
-								<th class="dashkit-table__th--actions">
+								<th class="dashkit-table__th dashkit-table__th--actions">
 									<?php echo esc_html( $this->get_actions_label() ); ?>
 								</th>
 							<?php endif; ?>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="dashkit-table__tbody">
 						<tr class="dashkit-table__loading">
 							<td colspan="<?php echo count( $columns ) + ( ! empty( $actions ) ? 1 : 0 ); ?>">
 								<?php echo esc_html__( 'Loading…', 'dashkit' ); ?>
