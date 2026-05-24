@@ -320,9 +320,9 @@
 
 	&__inner {
 		padding: 20px;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-		gap: 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
 	}
 
 	&__row label:not(.dashkit-buttonset__item) {
@@ -336,7 +336,6 @@
 	}
 
 	&__footer {
-		grid-column: 1 / -1;
 		display: flex;
 		align-items: center;
 		gap: 10px;
