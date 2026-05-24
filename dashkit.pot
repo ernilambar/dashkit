@@ -29,7 +29,6 @@ msgid "Request failed:"
 msgstr ""
 
 #: src/Core/Manager.php:192
-#: src/Widget/TabularWidget.php:126
 msgid "items"
 msgstr ""
 
@@ -57,47 +56,30 @@ msgstr ""
 msgid "Widget options saved."
 msgstr ""
 
-#: src/Widget/BaseWidget.php:344
+#: src/Widget/BaseWidget.php:348
 msgid "Options"
 msgstr ""
 
-#: src/Widget/TabularWidget.php:122
-#: src/Widget/TabularWidget.php:209
-msgid "Search…"
-msgstr ""
-
-#: src/Widget/TabularWidget.php:239
+#: src/Widget/TabularWidget.php:152
 msgid "Loading…"
 msgstr ""
 
-#: src/Widget/TabularWidget.php:263
+#: src/Widget/TabularWidget.php:260
 msgid "Actions"
 msgstr ""
 
-#: src/Widget/TabularWidget.php:332
+#: src/Widget/TabularWidget.php:329
 msgid "ID"
 msgstr ""
 
-#: src/Widget/TabularWidget.php:336
+#: src/Widget/TabularWidget.php:333
 msgid "Title"
 msgstr ""
 
-#: src/Widget/TabularWidget.php:340
+#: src/Widget/TabularWidget.php:337
 msgid "Date"
 msgstr ""
 
-#: src/Widget/TabularWidget.php:458
-msgid "Rows per Page"
-msgstr ""
-
-#: src/Widget/TabularWidget.php:481
-msgid "Ordering"
-msgstr ""
-
-#: src/Widget/TabularWidget.php:486
-msgid "Descending"
-msgstr ""
-
-#: src/Widget/TabularWidget.php:490
-msgid "Ascending"
+#: src/Widget/TabularWidget.php:446
+msgid "No data found."
 msgstr ""

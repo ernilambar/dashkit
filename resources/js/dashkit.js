@@ -176,13 +176,11 @@ function rebuildTableBody(table, rows, columns, hasActions) {
 
 	if (!rows.length) {
 		setDisplay(tableWidget, ".dashkit-table__wrap", "none");
-		setDisplay(tableWidget, ".dashkit-table__toolbar", "none");
 		return;
 	}
 
 	setDisplay(tableWidget, ".dashkit-table__empty-state", "none");
 	setDisplay(tableWidget, ".dashkit-table__wrap", "");
-	setDisplay(tableWidget, ".dashkit-table__toolbar", "");
 
 	rows.forEach(function (row) {
 		const tr = document.createElement("tr");
@@ -201,9 +199,6 @@ function rebuildTableBody(table, rows, columns, hasActions) {
 		}
 		tbody.append(tr);
 	});
-
-	const counter = tableWidget.querySelector("[data-dashkit-row-count]");
-	if (counter) counter.textContent = rows.length + " " + I18N.items;
 }
 
 // ════════════════════════════════════════════════════════════════

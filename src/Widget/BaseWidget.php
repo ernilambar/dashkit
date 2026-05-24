@@ -16,15 +16,15 @@ use Nilambar\Dashkit\Core\OptionsStore;
  *
  * Subclasses MUST implement:
  *   get_widget_name()     : string  — human-readable display name
- *   get_default_options() : array
- *   get_options_schema()  : array
  *   render()              : void
  *
  * Subclasses MAY override:
- *   get_actions()    : array
- *   on_save()        : void
- *   on_destroy()     : void
- *   enqueue_assets() : void
+ *   get_default_options() : array
+ *   get_options_schema()  : array
+ *   get_actions()         : array
+ *   on_save()             : void
+ *   on_destroy()          : void
+ *   enqueue_assets()      : void
  *
  * @since 1.0.0
  */
@@ -138,7 +138,9 @@ abstract class BaseWidget {
 	 *
 	 * @return array<string, mixed>
 	 */
-	abstract public function get_default_options(): array;
+	public function get_default_options(): array {
+		return [];
+	}
 
 	/**
 	 * Return the options schema used to build the options panel.
@@ -147,7 +149,9 @@ abstract class BaseWidget {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	abstract public function get_options_schema(): array;
+	public function get_options_schema(): array {
+		return [];
+	}
 
 	/**
 	 * Render the widget body HTML.
