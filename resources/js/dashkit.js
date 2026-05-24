@@ -512,7 +512,7 @@ function initChart(canvas) {
 	new Chart(canvas, {
 		type: chartType,
 		data,
-		plugins: chartType === "bar" ? [barValuePlugin] : [],
+		plugins: [barValuePlugin],
 		options: {
 			responsive: true,
 			maintainAspectRatio: false,
