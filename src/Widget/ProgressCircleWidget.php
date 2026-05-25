@@ -43,11 +43,29 @@ abstract class ProgressCircleWidget extends BaseWidget {
 	abstract public function get_data(): array;
 
 	/**
+	 * Return data for the async /widget-data REST response.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function get_rest_data(): array {
+		ob_start();
+		$this->render();
+		return [ 'html' => ob_get_clean() ];
+	}
+
+	/**
 	 * Render the progress circle widget HTML.
 	 *
 	 * @since 1.0.0
 	 */
 	public function render(): void {
+		if ( $this->is_lazy() ) {
+			echo '<div class="dashkit-progress-circle"><div class="dashkit-progress-circle__grid"></div></div>';
+			return;
+		}
+
 		$items = $this->get_data();
 
 		if ( empty( $items ) ) {

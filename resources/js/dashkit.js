@@ -157,6 +157,17 @@ function reloadWidget(widget) {
 				const canvas = widget.querySelector("canvas[data-chart-type]");
 				if (canvas) refreshChart(canvas, data.chart_data);
 			}
+			if (data.html) {
+				const current = widget.querySelector(
+					".dashkit-progress-circle",
+				);
+				if (current) {
+					const tmp = document.createElement("div");
+					tmp.innerHTML = data.html;
+					const fresh = tmp.firstElementChild;
+					if (fresh) current.replaceWith(fresh);
+				}
+			}
 			widget.classList.remove("dashkit-widget--loading");
 		})
 		.catch(() => {
