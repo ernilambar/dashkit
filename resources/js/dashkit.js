@@ -263,11 +263,18 @@ function buildOptionsPanel(panel) {
 			}
 
 			case "toggle": {
-				ctrl = document.createElement("input");
-				ctrl.type = "checkbox";
-				ctrl.dataset.key = field.key;
-				ctrl.checked = !!options[field.key];
-				ctrl.className = "dashkit-ctrl dashkit-ctrl--toggle";
+				row.className =
+					"dashkit-options-panel__row dashkit-options-panel__row--toggle";
+				const toggleInput = document.createElement("input");
+				toggleInput.type = "checkbox";
+				toggleInput.dataset.key = field.key;
+				toggleInput.checked = !!options[field.key];
+				toggleInput.className = "dashkit-ctrl dashkit-toggle__input";
+				const toggleTrack = document.createElement("span");
+				toggleTrack.className = "dashkit-toggle__track";
+				ctrl = document.createElement("label");
+				ctrl.className = "dashkit-toggle";
+				ctrl.append(toggleInput, toggleTrack);
 				break;
 			}
 
@@ -321,7 +328,11 @@ function buildOptionsPanel(panel) {
 
 			case "multicheck": {
 				ctrl = document.createElement("div");
-				ctrl.className = "dashkit-multicheck";
+				ctrl.className =
+					"dashkit-multicheck" +
+					(field.layout === "horizontal"
+						? " dashkit-multicheck--horizontal"
+						: "");
 				const selected = options[field.key] || [];
 				(field.choices || []).forEach(function (choice) {
 					const itemLabel = document.createElement("label");
@@ -331,8 +342,7 @@ function buildOptionsPanel(panel) {
 					checkbox.value = choice.value;
 					checkbox.checked = selected.includes(choice.value);
 					checkbox.dataset.key = field.key;
-					checkbox.className =
-						"dashkit-ctrl dashkit-ctrl--multicheck";
+					checkbox.className = "dashkit-ctrl";
 					const span = document.createElement("span");
 					span.textContent = choice.label;
 					itemLabel.append(checkbox, span);

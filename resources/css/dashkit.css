@@ -310,7 +310,10 @@
 		gap: 16px;
 	}
 
-	&__row label:not(.dashkit-buttonset__item) {
+	&__row
+		label:not(.dashkit-buttonset__item):not(.dashkit-radio__item):not(
+			.dashkit-multicheck__item
+		):not(.dashkit-toggle) {
 		display: block;
 		font-size: 11px;
 		font-weight: 600;
@@ -327,6 +330,18 @@
 		padding-top: 12px;
 		border-top: 1px solid var(--dashkit-border);
 		margin-top: 4px;
+	}
+
+	&__row--toggle {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		label:not(.dashkit-buttonset__item):not(.dashkit-radio__item):not(
+				.dashkit-multicheck__item
+			):not(.dashkit-toggle) {
+			margin-bottom: 0;
+		}
 	}
 
 	&__status {
@@ -378,31 +393,43 @@
 	}
 }
 
-.dashkit-ctrl--toggle {
-	appearance: none;
-	width: 36px;
-	height: 20px;
-	border-radius: 10px;
-	background: var(--dashkit-border-dark);
-	position: relative;
+.dashkit-toggle {
+	display: inline-flex;
+	align-items: center;
 	cursor: pointer;
-	flex-shrink: 0;
-	transition: background 0.2s;
 
-	&::before {
-		content: "";
+	&__input {
 		position: absolute;
-		top: 2px;
-		left: 2px;
-		width: 16px;
-		height: 16px;
-		border-radius: 50%;
-		background: var(--dashkit-bg);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-		transition: transform 0.2s;
+		opacity: 0;
+		width: 0;
+		height: 0;
+		margin: 0;
 	}
 
-	&:checked {
+	&__track {
+		width: 36px;
+		height: 20px;
+		border-radius: 10px;
+		background: var(--dashkit-border-dark);
+		position: relative;
+		flex-shrink: 0;
+		transition: background 0.2s;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background: var(--dashkit-bg);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+			transition: transform 0.2s;
+		}
+	}
+
+	&:has(input:checked) .dashkit-toggle__track {
 		background: var(--dashkit-blue);
 
 		&::before {
@@ -427,32 +454,29 @@
 		align-items: center;
 		gap: 6px;
 		font-size: 12px;
+		font-weight: normal;
 		cursor: pointer;
 	}
 }
 
 .dashkit-multicheck {
 	display: flex;
-	flex-wrap: wrap;
-	gap: 5px;
+	flex-direction: column;
+	gap: 6px;
+
+	&--horizontal {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 4px 12px;
+	}
 
 	&__item {
 		display: inline-flex;
 		align-items: center;
-		gap: 4px;
-		padding: 2px 8px;
-		border: 1px solid var(--dashkit-border-dark);
-		border-radius: 3px;
+		gap: 6px;
 		font-size: 12px;
+		font-weight: normal;
 		cursor: pointer;
-		background: var(--dashkit-bg);
-		transition: all 0.15s;
-
-		&:has(input:checked) {
-			background: var(--dashkit-selected-bg);
-			border-color: var(--dashkit-blue);
-			color: var(--dashkit-blue);
-		}
 	}
 }
 
