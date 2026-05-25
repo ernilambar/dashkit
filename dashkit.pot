@@ -56,7 +56,7 @@ msgstr ""
 msgid "Widget options saved."
 msgstr ""
 
-#: src/Widget/BaseWidget.php:348
+#: src/Widget/BaseWidget.php:349
 msgid "Options"
 msgstr ""
 

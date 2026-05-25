@@ -273,7 +273,11 @@ function buildOptionsPanel(panel) {
 
 			case "radio": {
 				ctrl = document.createElement("div");
-				ctrl.className = "dashkit-radio";
+				ctrl.className =
+					"dashkit-radio" +
+					(field.layout === "horizontal"
+						? " dashkit-radio--horizontal"
+						: "");
 				(field.choices || []).forEach(function (choice) {
 					const itemLabel = document.createElement("label");
 					itemLabel.className = "dashkit-radio__item";

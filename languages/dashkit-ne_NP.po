@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-05-24T06:50:41+00:00\n"
-"PO-Revision-Date: 2026-05-24T18:31:24+00:00\n"
+"PO-Revision-Date: 2026-05-25T04:07:21+00:00\n"
 "Language: ne_NP\n"
 "X-Generator: WP-CLI 2.13.0-alpha-77d421e\n"
 "X-Domain: dashkit\n"
@@ -57,7 +57,7 @@ msgstr "बचत गर्न असफल भयो।"
 msgid "Widget options saved."
 msgstr "विजेट विकल्पहरू बचत गरियो।"
 
-#: src/Widget/BaseWidget.php:348
+#: src/Widget/BaseWidget.php:349
 msgid "Options"
 msgstr "विकल्पहरू"
 
@@ -83,4 +83,4 @@ msgstr "मिति"
 
 #: src/Widget/TabularWidget.php:446
 msgid "No data found."
-msgstr ""
+msgstr "कुनै डेटा फेला परेन।"
