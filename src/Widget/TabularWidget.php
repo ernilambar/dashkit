@@ -206,11 +206,7 @@ abstract class TabularWidget extends BaseWidget {
 		<thead class="dashkit-table__thead">
 			<tr class="dashkit-table__header-row">
 				<?php foreach ( $columns as $col ) : ?>
-					<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>"
-					<?php
-					if ( ! empty( $col['width'] ) ) :
-						?>
-						style="width:<?php echo esc_attr( $col['width'] ); ?>"<?php endif; ?>>
+					<th scope="col" class="dashkit-table__th dashkit-table__col--<?php echo esc_attr( $col['key'] ); ?>">
 						<?php echo esc_html( $col['label'] ); ?>
 					</th>
 				<?php endforeach; ?>
