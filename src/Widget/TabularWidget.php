@@ -84,6 +84,7 @@ abstract class TabularWidget extends BaseWidget {
 
 				<div class="dashkit-table__wrap">
 					<?php $this->render_table_open(); ?>
+						<?php $this->render_colgroup( $columns, $actions ); ?>
 						<?php $this->render_thead( $columns, $actions ); ?>
 						<tbody class="dashkit-table__tbody">
 							<?php foreach ( $rows as $row ) : ?>
@@ -145,6 +146,7 @@ abstract class TabularWidget extends BaseWidget {
 
 			<div class="dashkit-table__wrap">
 				<?php $this->render_table_open(); ?>
+					<?php $this->render_colgroup( $columns, $actions ); ?>
 					<?php $this->render_thead( $columns, $actions ); ?>
 					<tbody class="dashkit-table__tbody">
 						<tr class="dashkit-table__loading">
@@ -190,6 +192,27 @@ abstract class TabularWidget extends BaseWidget {
 				data-widget-id="<?php echo esc_attr( $this->id ); ?>"
 				data-page-slug="<?php echo esc_attr( $this->page_slug ); ?>"
 				data-rest-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
+		<?php
+	}
+
+	/**
+	 * Render the <colgroup> block for column width control.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<int, array<string, string>>   $columns Visible columns.
+	 * @param array<string, array<string, mixed>> $actions Active row actions.
+	 */
+	private function render_colgroup( array $columns, array $actions ): void {
+		?>
+		<colgroup>
+			<?php foreach ( $columns as $col ) : ?>
+				<col<?php echo ! empty( $col['width'] ) ? ' style="width:' . esc_attr( $col['width'] ) . '"' : ''; ?>>
+			<?php endforeach; ?>
+			<?php if ( ! empty( $actions ) ) : ?>
+				<col>
+			<?php endif; ?>
+		</colgroup>
 		<?php
 	}
 
