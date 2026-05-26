@@ -559,6 +559,9 @@ function initChart(canvas) {
 		options: {
 			responsive: true,
 			maintainAspectRatio: false,
+			layout: {
+				padding: { top: 20 },
+			},
 			plugins: {
 				legend: { display: data.datasets.length > 1 },
 				tooltip: {
