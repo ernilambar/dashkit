@@ -195,16 +195,18 @@ function rebuildTableBody(table, rows, columns, hasActions) {
 
 	rows.forEach(function (row) {
 		const tr = document.createElement("tr");
+		tr.className = "dashkit-table__row";
 		tr.dataset.rowId = row._id || "";
 		columns.forEach(function (col) {
 			const td = document.createElement("td");
+			td.className = `dashkit-table__cell dashkit-table__col--${col.key}`;
 			td.dataset.col = col.key;
 			td.innerHTML = row[col.key] ?? "";
 			tr.append(td);
 		});
 		if (hasActions && row._actions_html) {
 			const td = document.createElement("td");
-			td.className = "dashkit-table__actions";
+			td.className = "dashkit-table__cell dashkit-table__actions";
 			td.innerHTML = row._actions_html;
 			tr.append(td);
 		}
