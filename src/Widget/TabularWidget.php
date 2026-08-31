@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Nilambar\Dashkit\Widget;
 
+use Nilambar\Dashkit\Core\Strings;
+
 /**
  * Class TabularWidget
  *
@@ -151,7 +153,7 @@ abstract class TabularWidget extends BaseWidget {
 					<tbody class="dashkit-table__tbody">
 						<tr class="dashkit-table__loading">
 							<td colspan="<?php echo (int) $this->get_total_columns( $columns, $actions ); ?>">
-								<?php echo esc_html__( 'Loading…', 'dashkit' ); ?>
+								<?php echo esc_html( Strings::get( 'loading' ) ); ?>
 							</td>
 						</tr>
 					</tbody>
@@ -276,7 +278,7 @@ abstract class TabularWidget extends BaseWidget {
 	 * @since 1.0.0
 	 */
 	public function get_actions_label(): string {
-		return __( 'Actions', 'dashkit' );
+		return Strings::get( 'actions' );
 	}
 
 	/**
@@ -345,15 +347,15 @@ abstract class TabularWidget extends BaseWidget {
 		return [
 			[
 				'key'   => 'id',
-				'label' => __( 'ID', 'dashkit' ),
+				'label' => Strings::get( 'col_id' ),
 			],
 			[
 				'key'   => 'title',
-				'label' => __( 'Title', 'dashkit' ),
+				'label' => Strings::get( 'col_title' ),
 			],
 			[
 				'key'   => 'date',
-				'label' => __( 'Date', 'dashkit' ),
+				'label' => Strings::get( 'col_date' ),
 			],
 		];
 	}
@@ -462,7 +464,7 @@ abstract class TabularWidget extends BaseWidget {
 	 * @since 1.0.0
 	 */
 	public function get_empty_message(): string {
-		return __( 'No data found.', 'dashkit' );
+		return Strings::get( 'no_data' );
 	}
 
 	/**

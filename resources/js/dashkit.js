@@ -63,7 +63,7 @@ async function handleAction(btn) {
 		return;
 	}
 
-	if (confirmNeeded && !window.confirm(I18N.confirmAction)) {
+	if (confirmNeeded && !window.confirm(I18N.confirm_action)) {
 		return;
 	}
 
@@ -85,14 +85,14 @@ async function handleAction(btn) {
 		if (!response.ok || result.success === false) {
 			toast({
 				type: "error",
-				message: result.message || I18N.actionFailed,
+				message: result.message || I18N.action_failed,
 			});
 			return;
 		}
 
 		toast({
 			type: result.type || "success",
-			message: result.message || I18N.actionDone,
+			message: result.message || I18N.action_done,
 		});
 
 		const resolvedAfter = result.after || after;
@@ -102,7 +102,9 @@ async function handleAction(btn) {
 	} catch (err) {
 		toast({
 			type: "error",
-			message: I18N.requestFailed + " " + err.message,
+			message: I18N.request_failed.includes("%s")
+				? I18N.request_failed.replace("%s", err.message)
+				: I18N.request_failed + " " + err.message,
 		});
 	} finally {
 		btn.disabled = false;
@@ -379,7 +381,7 @@ function buildOptionsPanel(panel) {
 
 	const saveBtn = document.createElement("button");
 	saveBtn.className = "button button-primary dashkit-options-panel__save";
-	saveBtn.textContent = I18N.saveOptions;
+	saveBtn.textContent = I18N.save_options;
 
 	const status = document.createElement("span");
 	status.className = "dashkit-options-panel__status";
@@ -426,16 +428,16 @@ function buildOptionsPanel(panel) {
 					);
 					toast({
 						type: "success",
-						message: I18N.optionsSaved,
+						message: I18N.options_saved,
 						duration: 2500,
 					});
 					reloadWidget(widget);
 				} else {
-					throw new Error(data.message || I18N.saveFailed);
+					throw new Error(data.message || I18N.save_failed);
 				}
 			})
 			.catch((err) => {
-				status.textContent = I18N.saveError;
+				status.textContent = I18N.save_error;
 				status.className = "dashkit-options-panel__status is-error";
 				toast({ type: "error", message: err.message });
 			});
