@@ -2,25 +2,6 @@
 
 Reusable widget engine for WordPress admin pages. Bundles multiple copies safely via a version-election bootstrap in `init.php`.
 
-## Package manager
-
-Always use **pnpm** — never npm (creates conflicting `package-lock.json`).
-
-## Project structure
-
-```
-src/
-  API/        — REST route registration (REST_API.php)
-  Core/       — Manager, Registry, PageContext, OptionsStore
-  Widget/     — BaseWidget, TabularWidget, ChartWidget, ProgressCircleWidget
-resources/
-  js/         — dashkit.js (Vite entry)
-  css/        — dashkit.css
-assets/       — compiled output
-```
-
-Namespace root: `Nilambar\Dashkit\` (PSR-4, composer autoloaded).
-
 ## Commands
 
 ### JS
@@ -35,12 +16,20 @@ composer lint    # parallel-lint + phpcs
 composer format  # phpcbf auto-fix
 ```
 
-### i18n
-```bash
-composer pot        # regenerate dashkit.pot
-composer update-po  # sync .po files from .pot
-composer make-mo    # compile .po → .mo
+### Strings
+
+Dashkit ships no text domain. Every user-facing string has an English default in `src/Core/Strings.php` and is overridden with the `dashkit_strings` filter:
+
+```php
+add_filter( 'dashkit_strings', function ( array $strings ) {
+    $strings['actions'] = 'Aktionen';
+    return $strings;
+} );
 ```
+
+- When adding a new user-facing string, add its default to `Strings::defaults()` and read it back with `Strings::get( 'key' )`.
+- JS-facing strings are exposed to the frontend via `dashkitConfig.i18n` (same keys as the strings config).
+- Placeholders use `%s` (e.g. `request_failed`).
 
 ## Widget system
 
@@ -54,12 +43,7 @@ composer make-mo    # compile .po → .mo
 - `get_widget_config()` returns developer-locked keys (merged last, never saved by the user)
 - Lazy-load mode: return `['lazy' => true]` from `get_widget_config()`; JS fetches rows via REST after page load
 
-## PHP requirements
-
-- PHP >= 8.0
-- Coding standard: `ernilambar/coding-standard` (PHPCS)
-
-## Definition of done
+## Quality gate
 
 Before marking any task complete:
 - Run `composer lint` and ensure it exits with no errors. Run `composer format` to resolve fixable PHPCS errors.

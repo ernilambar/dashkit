@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Nilambar\Dashkit\Widget;
 
 use Nilambar\Dashkit\Core\OptionsStore;
+use Nilambar\Dashkit\Core\Strings;
 
 /**
  * Class BaseWidget
@@ -346,7 +347,7 @@ abstract class BaseWidget {
 			<?php if ( ! empty( $this->get_options_schema() ) ) : ?>
 			<div class="dashkit-widget__header-actions">
 				<button class="dashkit-widget__options-toggle"
-						title="<?php echo esc_attr__( 'Options', 'dashkit' ); ?>"
+						title="<?php echo esc_attr( Strings::get( 'options' ) ); ?>"
 						data-dashkit-options-toggle>
 					<i class="ri-settings-3-line"></i>
 				</button>
