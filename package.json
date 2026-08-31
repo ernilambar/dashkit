@@ -2,18 +2,19 @@
   "name": "dashkit",
   "version": "1.0.0",
   "description": "Reusable widget engine for WordPress admin pages.",
-  "author": "Nilambar Sharma",
-  "license": "GPL-2.0-or-later",
   "homepage": "https://github.com/ernilambar/dashkit",
+  "bugs": {
+    "url": "https://github.com/ernilambar/dashkit/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ernilambar/dashkit.git"
   },
-  "bugs": {
-    "url": "https://github.com/ernilambar/dashkit/issues"
-  },
-  "engines": {
-    "node": ">=22"
+  "license": "GPL-2.0-or-later",
+  "author": "Nilambar Sharma",
+  "scripts": {
+    "build": "vite build",
+    "format": "prettier \"**/*.{cjs,css,js,json,mjs}\" --write --log-level warn"
   },
   "browserslist": "> 2%, last 2 versions, not dead",
   "dependencies": {
@@ -29,8 +30,7 @@
     "prettier": "npm:wp-prettier@^3.0.3",
     "vite": "^8.0.13"
   },
-  "scripts": {
-    "build": "vite build",
-    "format": "prettier \"**/*.{cjs,css,js,json,mjs}\" --write --log-level warn"
+  "engines": {
+    "node": ">=22"
   }
 }
