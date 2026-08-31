@@ -58,10 +58,10 @@ final class Strings {
 			'items'          => 'items',
 			'save_options'   => 'Save Changes',
 			'saving'         => 'Saving…',
-			'saved'          => 'Saved',
-			'save_error'     => 'Error',
+			'saved'          => 'Saved.',
+			'save_error'     => 'Error occurred.',
 			'save_failed'    => 'Save failed.',
-			'options_saved'  => 'Widget options saved.',
+			'options_saved'  => 'Options saved.',
 		];
 	}
 
