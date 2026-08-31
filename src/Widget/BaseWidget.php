@@ -348,6 +348,7 @@ abstract class BaseWidget {
 			<div class="dashkit-widget__header-actions">
 				<button class="dashkit-widget__options-toggle"
 						title="<?php echo esc_attr( Strings::get( 'options' ) ); ?>"
+						aria-label="<?php echo esc_attr( Strings::get( 'options' ) ); ?>"
 						data-dashkit-options-toggle>
 					<i class="ri-settings-3-line"></i>
 				</button>

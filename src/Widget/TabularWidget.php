@@ -353,10 +353,6 @@ abstract class TabularWidget extends BaseWidget {
 				'key'   => 'title',
 				'label' => Strings::get( 'col_title' ),
 			],
-			[
-				'key'   => 'date',
-				'label' => Strings::get( 'col_date' ),
-			],
 		];
 	}
 

@@ -47,7 +47,6 @@ final class Strings {
 			'actions'        => 'Actions',
 			'col_id'         => 'ID',
 			'col_title'      => 'Title',
-			'col_date'       => 'Date',
 			'loading'        => 'Loading…',
 			'no_data'        => 'No data found.',
 
