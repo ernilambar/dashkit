@@ -1,35 +1,24 @@
 # Dashkit
 
-Reusable widget engine for WordPress admin pages. Bundles multiple copies safely via a version-election bootstrap in `init.php`.
+Reusable widget engine for WordPress admin pages. PHP 8.0+ backend with a Vite-built vanilla JS + Chart.js frontend.
+
+## Setup
+
+```bash
+npm install
+composer install
+```
+
+Requires Node.js >= 22 and PHP >= 8.0.
 
 ## Commands
 
-### JS
 ```bash
-pnpm build       # production build
-pnpm format      # prettier (js/css/json)
+npm run build          # Build JS/CSS assets via Vite (outputs to assets/)
+npm run format         # Format JS/CSS/JSON with Prettier (WordPress config)
+composer run lint      # Run PHP lint + PHPCS (WordPress coding standards)
+composer run format    # Auto-fix PHP with PHP Code Beautifier
 ```
-
-### PHP
-```bash
-composer lint    # parallel-lint + phpcs
-composer format  # phpcbf auto-fix
-```
-
-### Strings
-
-Dashkit ships no text domain. Every user-facing string has an English default in `src/Core/Strings.php` and is overridden with the `dashkit_strings` filter:
-
-```php
-add_filter( 'dashkit_strings', function ( array $strings ) {
-    $strings['actions'] = 'Aktionen';
-    return $strings;
-} );
-```
-
-- When adding a new user-facing string, add its default to `Strings::defaults()` and read it back with `Strings::get( 'key' )`.
-- JS-facing strings are exposed to the frontend via `dashkitConfig.i18n` (same keys as the strings config).
-- Placeholders use `%s` (e.g. `request_failed`).
 
 ## Widget system
 
@@ -42,6 +31,15 @@ add_filter( 'dashkit_strings', function ( array $strings ) {
 - `get_options_schema()` is optional — omit it if the widget has no user-editable options
 - `get_widget_config()` returns developer-locked keys (merged last, never saved by the user)
 - Lazy-load mode: return `['lazy' => true]` from `get_widget_config()`; JS fetches rows via REST after page load
+
+## Conventions
+
+- **Namespace**: All PHP lives under `Nilambar\Dashkit` (PSR-4 mapped to `src/`).
+- **Strict types**: Every PHP file opens with `declare(strict_types=1);`.
+- **Widget architecture**: Extend `BaseWidget`, register via `Registry`, render into zones via `Manager`.
+- **Bootstrap pattern**: `init.php` uses `DashkitBootstrap` for version election across bundled copies — never edit directly unless changing the election mechanism.
+- **Asset build**: JS entry is `resources/js/dashkit.js`, CSS is `resources/css/dashkit.css`. Vite outputs to `assets/` as IIFE bundle.
+- **WordPress standards**: All output must be escaped (`esc_attr`, `esc_html`, `esc_url`). Use `_doing_it_wrong()` for developer-facing errors.
 
 ## Quality gate
 
