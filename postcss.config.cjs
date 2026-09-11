@@ -1,3 +1,5 @@
+const postcssNested = require("postcss-nested").default;
+
 module.exports = {
-	plugins: [require("postcss-nested"), require("postcss-preset-env")],
+	plugins: [postcssNested, require("postcss-preset-env")],
 };

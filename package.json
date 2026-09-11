@@ -22,13 +22,13 @@
     "toastle": "^2.1.0"
   },
   "devDependencies": {
-    "@wordpress/prettier-config": "^4.46.0",
+    "@wordpress/prettier-config": "^4.54.0",
     "browserslist-to-esbuild": "^2.1.1",
-    "postcss": "^8.5.14",
-    "postcss-nested": "^7.0.2",
-    "postcss-preset-env": "^11.3.0",
+    "postcss": "^8.5.28",
+    "postcss-nested": "^8.0.1",
+    "postcss-preset-env": "^11.5.1",
     "prettier": "npm:wp-prettier@^3.0.3",
-    "vite": "^8.0.13"
+    "vite": "^8.2.2"
   },
   "engines": {
     "node": ">=22"
