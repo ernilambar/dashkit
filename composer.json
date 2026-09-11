@@ -1,7 +1,7 @@
 {
   "name": "ernilambar/dashkit",
   "description": "Reusable widget engine for WordPress admin pages.",
-  "license": "GPL-2.0-or-later",
+  "license": "MIT",
   "type": "library",
   "require": {
     "php": ">=8.0"

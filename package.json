@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/ernilambar/dashkit.git"
   },
-  "license": "GPL-2.0-or-later",
+  "license": "MIT",
   "author": "Nilambar Sharma",
   "scripts": {
     "build": "vite build",

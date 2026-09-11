@@ -61,4 +61,4 @@ All types extend `BaseWidget` and require `get_widget_name()` and `render()`. Ad
 
 ## License
 
-[GPL-2.0-or-later](https://www.gnu.org/licenses/gpl-2.0.html)
+[MIT](https://opensource.org/licenses/MIT)
