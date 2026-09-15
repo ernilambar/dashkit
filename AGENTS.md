@@ -39,11 +39,13 @@ composer run format    # Auto-fix PHP with PHP Code Beautifier
 - **Widget architecture**: Extend `BaseWidget`, register via `Registry`, render into zones via `Manager`.
 - **Bootstrap pattern**: `init.php` uses `DashkitBootstrap` for version election across bundled copies — never edit directly unless changing the election mechanism.
 - **Asset build**: JS entry is `resources/js/dashkit.js`, CSS is `resources/css/dashkit.css`. Vite outputs to `assets/` as IIFE bundle.
+- **Formatting**: Prettier uses `@wordpress/prettier-config` (declared via the `prettier` key in `package.json`) — do not add a custom Prettier config file.
 - **WordPress standards**: All output must be escaped (`esc_attr`, `esc_html`, `esc_url`). Use `_doing_it_wrong()` for developer-facing errors.
 
 ## Quality gate
 
 Before marking any task complete:
+
 - Run `composer lint` and ensure it exits with no errors. Run `composer format` to resolve fixable PHPCS errors.
 - Run `pnpm build` to bundle the assets.
 - Run `pnpm format` to auto-format files with Prettier.

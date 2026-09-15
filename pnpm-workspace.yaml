@@ -1,4 +1,8 @@
-minimumReleaseAge: 10080  # 7 days in minutes
+minimumReleaseAge: 10080 # 7 days in minutes
+
+minimumReleaseAgeExclude:
+  - "@wordpress/prettier-config"
+  - wp-prettier
 
 onlyBuiltDependencies:
   - esbuild
