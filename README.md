@@ -12,12 +12,12 @@ This is a Composer package. Add the VCS repository to the consuming project's `c
 
 ```json
 {
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/ernilambar/dashkit"
-    }
-  ]
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/ernilambar/dashkit"
+		}
+	]
 }
 ```
 
