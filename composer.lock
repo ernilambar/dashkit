@@ -4,9 +4,86 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecfad5bb6a1c430bc756da3f7678744c",
+    "content-hash": "67f2bcd712b6a6cfead00c1453dc2505",
     "packages": [],
     "packages-dev": [
+        {
+            "name": "composer/semver",
+            "version": "3.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/semver.git",
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/semver/zipball/9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.2 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.11",
+                "symfony/phpunit-bridge": "^3 || ^7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Semver\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                },
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com",
+                    "homepage": "http://robbast.nl"
+                }
+            ],
+            "description": "Version comparison library that offers utilities, version constraint parsing and validation.",
+            "keywords": [
+                "semantic",
+                "semver",
+                "validation",
+                "versioning"
+            ],
+            "support": {
+                "irc": "ircs://irc.libera.chat:6697/composer",
+                "issues": "https://github.com/composer/semver/issues",
+                "source": "https://github.com/composer/semver/tree/3.5.2"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-10-22T15:37:26+00:00"
+        },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
             "version": "v1.2.1",
@@ -214,12 +291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-parallel-lint/PHP-Parallel-Lint.git",
-                "reference": "f8cb90a"
+                "reference": "186aee3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-parallel-lint/PHP-Parallel-Lint/zipball/f8cb90a",
-                "reference": "f8cb90a",
+                "url": "https://api.github.com/repos/php-parallel-lint/PHP-Parallel-Lint/zipball/186aee3",
+                "reference": "186aee3",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +349,7 @@
                 "issues": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues",
                 "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/develop"
             },
-            "time": "2026-06-22T01:06:31+00:00"
+            "time": "2026-10-25T22:03:36+00:00"
         },
         {
             "name": "phpcsstandards/phpcsextra",
@@ -451,16 +528,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.5",
+            "version": "2.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "148cefffaf0233e4c08cc13db8a195a56dd6dfe9"
+                "reference": "1427af4647235b4a73b13940b1f1258d3584f36e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/148cefffaf0233e4c08cc13db8a195a56dd6dfe9",
-                "reference": "148cefffaf0233e4c08cc13db8a195a56dd6dfe9",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/1427af4647235b4a73b13940b1f1258d3584f36e",
+                "reference": "1427af4647235b4a73b13940b1f1258d3584f36e",
                 "shasum": ""
             },
             "require": {
@@ -492,9 +569,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.5"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.6"
             },
-            "time": "2026-08-31T16:05:28+00:00"
+            "time": "2026-09-27T20:07:45+00:00"
         },
         {
             "name": "slevomat/coding-standard",
@@ -642,16 +719,16 @@
         },
         {
             "name": "wp-cli/mustangostang-spyc",
-            "version": "0.6.6",
+            "version": "0.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/spyc.git",
-                "reference": "30f25baaaba939caaff1f4b8c7ed998632f59fe2"
+                "reference": "8adbd399bc819c19e36f4aab0aeeb3b918793e1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/spyc/zipball/30f25baaaba939caaff1f4b8c7ed998632f59fe2",
-                "reference": "30f25baaaba939caaff1f4b8c7ed998632f59fe2",
+                "url": "https://api.github.com/repos/wp-cli/spyc/zipball/8adbd399bc819c19e36f4aab0aeeb3b918793e1c",
+                "reference": "8adbd399bc819c19e36f4aab0aeeb3b918793e1c",
                 "shasum": ""
             },
             "require": {
@@ -687,22 +764,22 @@
             "description": "A simple YAML loader/dumper class for PHP (WP-CLI fork)",
             "homepage": "https://github.com/mustangostang/spyc/",
             "support": {
-                "source": "https://github.com/wp-cli/spyc/tree/0.6.6"
+                "source": "https://github.com/wp-cli/spyc/tree/0.6.7"
             },
-            "time": "2026-03-12T12:30:41+00:00"
+            "time": "2026-10-06T08:59:48+00:00"
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.13.0",
+            "version": "v0.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "4a04ffbe322b031b4c54e176edf1dfd299c7fe55"
+                "reference": "5bd08e633ef3be1e21834a971e4c424fafd4f8f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/4a04ffbe322b031b4c54e176edf1dfd299c7fe55",
-                "reference": "4a04ffbe322b031b4c54e176edf1dfd299c7fe55",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/5bd08e633ef3be1e21834a971e4c424fafd4f8f5",
+                "reference": "5bd08e633ef3be1e21834a971e4c424fafd4f8f5",
                 "shasum": ""
             },
             "require": {
@@ -750,9 +827,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.13.0"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.13.2"
             },
-            "time": "2026-04-08T12:28:41+00:00"
+            "time": "2026-10-07T11:43:52+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
@@ -760,19 +837,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "97e0ac20290f2ef579ef87171bc7e62929ac3f42"
+                "reference": "a1735b03999abc2c642a51daa6852d2bd6e7478b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/97e0ac20290f2ef579ef87171bc7e62929ac3f42",
-                "reference": "97e0ac20290f2ef579ef87171bc7e62929ac3f42",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/a1735b03999abc2c642a51daa6852d2bd6e7478b",
+                "reference": "a1735b03999abc2c642a51daa6852d2bd6e7478b",
                 "shasum": ""
             },
             "require": {
+                "composer/semver": "^1.4 || ^2 || ^3",
                 "mustache/mustache": "^3.0.0",
                 "php": ">=7.2.24 || ^8.0",
                 "wp-cli/mustangostang-spyc": "^0.6.3",
-                "wp-cli/php-cli-tools": "~0.13.0"
+                "wp-cli/php-cli-tools": "~0.13.2"
             },
             "require-dev": {
                 "justinrainbow/json-schema": "^6.3",
@@ -837,7 +915,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2026-09-07T06:30:37+00:00"
+            "time": "2026-10-19T17:04:36+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
